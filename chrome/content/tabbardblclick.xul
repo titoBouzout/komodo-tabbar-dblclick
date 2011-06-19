@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overlay  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+ 
+	<script type="application/x-javascript">
+	  
+	  /*
+		improvements more than welcome please submit these to github, regards
+	  */
+	  var titoTabbarDblClick = {
+		
+		load:function()
+		{
+		  removeEventListener('load', titoTabbarDblClick.load, false);
+		  document.getElementById('tabbed-view').addEventListener('dblclick', titoTabbarDblClick.dblclick, false);
+		},
+		unload:function()
+		{
+		  document.getElementById('tabbed-view').removeEventListener('dblclick', titoTabbarDblClick.dblclick, false);
+
+		},
+		dblclick:function(aEvent)
+		{
+		  if(aEvent.button == 0 &amp;&amp; aEvent.originalTarget.tagName != 'html:embed')
+		  {
+			if(aEvent.originalTarget.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id == 'tabbed-view')
+			  ko.commands.doCommandAsync('cmd_new', aEvent);
+		  }
+		}
+	  };
+
+	  addEventListener('load', titoTabbarDblClick.load, false);
+	  addEventListener('unload', titoTabbarDblClick.unload, false);
+	  
+	</script>
+
+</overlay>
